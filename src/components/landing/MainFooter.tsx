@@ -1,11 +1,39 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import AnimatedButton from "../ui/AnimatedButton";
 import logo from "@/images/UpdatedLogo.png";
 import Image from "next/image";
+import { useEmailJS } from "@/hooks/useEmailJS";
+
 const MainFooter = () => {
+  const [email, setEmail] = useState("");
+  const { isLoading, isSuccess, error, submitEmail, resetState } = useEmailJS();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      return;
+    }
+
+    await submitEmail(email, 'footer-section');
+    
+    if (!error) {
+      setEmail("");
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (error || isSuccess) {
+      resetState();
+    }
+  };
+
   return (
     <footer
       className="w-full py-12 md:py-16 lg:py-20"
@@ -28,19 +56,38 @@ const MainFooter = () => {
           </p>
 
           {/* Email Signup */}
-          <div className="relative max-w-sm sm:max-w-md md:max-w-xl md:h-16 lg:h-[70px] mx-auto px-4 sm:px-0">
+          <form onSubmit={handleSubmit} className="relative max-w-sm sm:max-w-md md:max-w-xl md:h-16 lg:h-[70px] mx-auto px-4 sm:px-0">
             <Input
               type="email"
               placeholder="Enter your email address"
+              value={email}
+              onChange={handleEmailChange}
+              disabled={isLoading}
               className="w-full bg-[#2A1F3A]/80 border-[#3D2A50] text-white placeholder:text-gray-300 
                        h-12 sm:h-14 md:h-16 lg:h-[70px] 
                        px-4 sm:px-6 pr-0 md:pr-40 lg:pr-48 
                        rounded-full text-sm sm:text-base md:text-lg"
             />
-            <Button className="md:absolute right-5 lg:right-4 h-max top-1/2 md:mt-0 mt-4 md:-translate-y-1/2 bg-transparent hover:bg-transparent p-0">
+            <Button 
+              type="submit"
+              disabled={isLoading || !email || !email.includes('@')}
+              className="md:absolute right-5 lg:right-4 h-max top-1/2 md:mt-0 mt-4 md:-translate-y-1/2 bg-transparent hover:bg-transparent p-0"
+            >
               <AnimatedButton />
             </Button>
-          </div>
+          </form>
+
+          {/* Status Messages */}
+          {isSuccess && (
+            <p className="text-green-400 text-sm mt-4 text-center">
+              🎉 Successfully joined the waitlist! We&apos;ll be in touch soon.
+            </p>
+          )}
+          {error && (
+            <p className="text-red-400 text-sm mt-4 text-center">
+              {error}
+            </p>
+          )}
         </div>
 
         {/* Bottom Section */}

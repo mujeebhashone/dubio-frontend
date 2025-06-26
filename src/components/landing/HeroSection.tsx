@@ -1,14 +1,41 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import circle1 from "@/images/circle.gif";
 import Image from "next/image";
-import play from "@/images/Play.gif";
+import play from "@/images/play.gif";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import playLeft from "@/images/Playleft.png";
 import playRight from "@/images/playRight.png";
 import AnimatedButton from "../ui/AnimatedButton";
+import { useEmailJS } from "@/hooks/useEmailJS";
 
 const HeroSection = () => {
+  const [email, setEmail] = useState("");
+  const { isLoading, isSuccess, error, submitEmail, resetState } = useEmailJS();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@')) {
+      return;
+    }
+
+    await submitEmail(email, 'hero-section');
+    
+    if (!error) {
+      setEmail("");
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (error || isSuccess) {
+      resetState();
+    }
+  };
+
   return (
     <div className="max-w-[1920px] mx-auto h-[100vh] flex items-center">
       <div className="max-w-[85%] mx-auto">
@@ -24,19 +51,35 @@ const HeroSection = () => {
             </p>
 
             {/* Email Input and Join Waitlist Button */}
-            <div className="relative mt-10">
+            <form onSubmit={handleSubmit} className="relative mt-10">
               <Input
                 type="email"
                 placeholder="Enter your email address"
+                value={email}
+                onChange={handleEmailChange}
+                disabled={isLoading}
                 className="w-full relative bg-[#2A1F3A] border-[#3D2A50] text-white placeholder:text-gray-400 h-12 sm:h-14 md:h-16 lg:h-[70px] px-6 rounded-full"
               />
-              <Button className="md:absolute justify-self-center m-auto w-max right-5 lg:right-4 h-max top-1/2 md:mt-0 mt-4 md:-translate-y-1/2 bg-transparent hover:bg-transparent p-0">
-              <AnimatedButton />
-            </Button>
-              {/* <Button className=" absolute right-0 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent">
+              <Button 
+                type="submit"
+                disabled={isLoading || !email || !email.includes('@')}
+                className="md:absolute justify-self-center m-auto w-max right-5 lg:right-4 h-max top-1/2 md:mt-0 mt-4 md:-translate-y-1/2 bg-transparent hover:bg-transparent p-0"
+              >
                 <AnimatedButton />
-              </Button> */}
-            </div>
+              </Button>
+            </form>
+
+            {/* Status Messages */}
+            {isSuccess && (
+              <p className="text-green-400 text-sm mt-2 text-center md:text-left">
+                🎉 Successfully joined the waitlist! We&apos;ll be in touch soon.
+              </p>
+            )}
+            {error && (
+              <p className="text-red-400 text-sm mt-2 text-center md:text-left">
+                {error}
+              </p>
+            )}
           </div>
           <div className="relative w-[1010px] ">
             <div className="absolute -z-10 2xl:-top-[420px] -top-[200px] left-[130%] -translate-x-1/2 2xl:w-[2010px] 2xl:h-[1217px] w-[1010px] h-[717px] object-cover">
@@ -61,7 +104,7 @@ const HeroSection = () => {
                   alt="Play"
                   width={250}
                   height={250}
-                  className="bg-transparent "
+                  className="bg-transparent"
                 />
               </div>
               </div>
