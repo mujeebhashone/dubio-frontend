@@ -9,16 +9,7 @@ const VideoSection = () => {
       <div className="max-w-[85%] mx-auto">
         <div>
           {/* Main Video Container */}
-          <div className="aspect-[16/9] bg-[#1A1630] rounded-3xl overflow-hidden">
-            {/* Video Player */}
-            {/* <video 
-                        className='w-full h-full object-cover'
-                        controls
-                        poster="/video-thumbnail.jpg"
-                    >
-                        <source src="/video.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video> */}
+          <div className="relative max-w-[85%] mx-auto aspect-[16/9] bg-[#1A1630] rounded-3xl">
             <iframe
               src="https://www.youtube.com/embed/dQw4w9WgXcQ"
               title="YouTube video player"
@@ -26,27 +17,25 @@ const VideoSection = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="w-full h-full object-contain"
-            ></iframe>
-
+            />
             {/* Overlay UI Elements */}
             <div className="absolute inset-2 pointer-events-none z-10">
               {/* Top Left - Waveform */}
-              <div className="absolute top-40 left-10 z-50">
-                <Image src={sound} alt="video" width={291} height={60} />
+              <div className="absolute lg:top-[10%] -left-[10%] top-12 z-50 lg:w-[291px] lg:h-[60px] md:w-[160px] md:h-[40px] w-[100px] h-[30px]">
+                <Image src={sound} alt="video" width={291} height={60} className="w-full h-full" />
               </div>
 
               {/* Right Side - Language Selection Panel */}
-              <div className="absolute top-40 right-40 w-80">
+              <div className="absolute xl:top-[10%] lg:top-16 top-5 sm:top-14 xl:right-5 lg:-right-[13%] md:-right-40 -right-68 sm:-right-56 w-80">
                 <Image
                   src={language}
                   alt="language"
                   width={291}
                   height={60}
                   unoptimized
+                  className="xl:w-[291px] xl:h-auto lg:w-[200px] lg:h-auto md:w-[150px] md:h-auto sm:w-[100px] sm:h-auto w-[50px] h-auto"
                 />
               </div>
-
-              {/* Center Dividing Line */}
             </div>
           </div>
         </div>

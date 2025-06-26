@@ -28,16 +28,16 @@ const MainFooter = () => {
           </p>
 
           {/* Email Signup */}
-          <div className="relative max-w-sm sm:max-w-md md:max-w-xl h-[70px] mx-auto px-4 sm:px-0">
+          <div className="relative max-w-sm sm:max-w-md md:max-w-xl md:h-16 lg:h-[70px] mx-auto px-4 sm:px-0">
             <Input
               type="email"
               placeholder="Enter your email address"
               className="w-full bg-[#2A1F3A]/80 border-[#3D2A50] text-white placeholder:text-gray-300 
                        h-12 sm:h-14 md:h-16 lg:h-[70px] 
-                       px-4 sm:px-6 pr-32 sm:pr-36 md:pr-40 lg:pr-48 
+                       px-4 sm:px-6 pr-0 md:pr-40 lg:pr-48 
                        rounded-full text-sm sm:text-base md:text-lg"
             />
-            <Button className="absolute right-4 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent p-0">
+            <Button className="md:absolute right-5 lg:right-4 h-max top-1/2 md:mt-0 mt-4 md:-translate-y-1/2 bg-transparent hover:bg-transparent p-0">
               <AnimatedButton />
             </Button>
           </div>
