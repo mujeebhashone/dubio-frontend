@@ -5,36 +5,36 @@ import step1 from "@/images/section1.png";
 import step3 from "@/images/section3.png";
 
 const HowItsWork = () => {
-  const steps = [
-    {
-      number: 1,
-      title: "Paste Your Video URL",
-      description: "Paste your YouTube link and dub it now.",
-      image: step2,
-      alt: "Paste video URL step",
-    },
-    {
-      number: 2,
-      title: "Choose Languages",
-      description:
-        "Select your target language(s), your cloned voice, and subtitle format.",
-      image: step1,
-      alt: "Choose languages step",
-    },
-    {
-      number: 3,
-      title: "Get Magic Back",
-      description:
-        "Get 1080p MP4 + .srt / .vtt files — optimized for every platform.",
-      image: step3,
-      alt: "Get results step",
-    },
-  ];
+  // const steps = [
+  //   {
+  //     number: 1,
+  //     title: "Paste Your Video URL",
+  //     description: "Paste your YouTube link and dub it now.",
+  //     image: step2,
+  //     alt: "Paste video URL step",
+  //   },
+  //   {
+  //     number: 2,
+  //     title: "Choose Languages",
+  //     description:
+  //       "Select your target language(s), your cloned voice, and subtitle format.",
+  //     image: step1,
+  //     alt: "Choose languages step",
+  //   },
+  //   {
+  //     number: 3,
+  //     title: "Get Magic Back",
+  //     description:
+  //       "Get 1080p MP4 + .srt / .vtt files — optimized for every platform.",
+  //     image: step3,
+  //     alt: "Get results step",
+  //   },
+  // ];
   return (
     <div className="max-w-[1920px] mx-auto">
       <div className="max-w-[85%] mx-auto">
         <h2 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-16">
-          How It's Work
+          How It&apos;s Work
         </h2>
 
         <div className="grid lg:grid-cols-3 gap-10 md:gap-16">

@@ -247,8 +247,6 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import dubbing from "@/images/bgwave.png";
-import dubbing1 from "@/images/bgwaveright.png";
 import ai from "@/images/R1.png";
 import ai1 from "@/images/R@.png";
 import ai2 from "@/images/R3.png";
